@@ -1,0 +1,69 @@
+<ul class="nav nav-pils" role="tablist">
+  <li class="active"><%= link_to 'View list', high_scores_path %></li>
+  <li><%= link_to 'New HighScore', new_high_score_path %></li>
+</ul>
+
+
+
+<p id="notice"><%= notice %></p>
+
+<h1>Listing High Scores</h1>
+
+<table class="table table-condensed">
+  <thead>
+    <tr>
+      <th>Game</th>
+      <th>Score</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @high_scores.each do |high_score| %>
+      <tr>
+	<td>
+		<span class="has-tooltip" data-toggle="tooltip" title="<%= "Created on #{high_score.created_at.strftime("%m/%e/%Y at %w:%M %p")}, Last modified on #{high_score.updated_at.strftime("%m/%e/%Y at %w:%M %p")}" %>">
+			<%= high_score.game %>
+		</span>
+	</td>
+        <td><%= high_score.score %></td>
+	<td>
+	<% if high_score.notes? %>
+	
+       	<!-- Button trigger modal -->
+	<button class="btn btn-link" data-toggle="modal" data-target="#todo-<%= high_score.id %>-notes">
+		View notes
+	</button>
+
+  <!-- Modal -->
+	<div class="modal fade" id="todo-<%= high_score.id %>-notes" tabindex="-1" role="dialog" aria-labelledby="todo-<%= high_score.id %>-label" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="todo-<%= high_score.id %>-label">Notes</h4>
+				</div>
+				<div class="modal-body">
+					<%= high_score.notes %>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+  <button type="button" class="btn btn-link has-popover" data-toggle="popover" title="Notes" data-content="<%= high_score.notes %>">View notes (popover)</button>
+	<% end %>
+        <td><%= link_to 'Show', high_score, class: 'btn btn-primary btn-xs' %></td>
+        <td><%= link_to 'Edit', edit_high_score_path(high_score), class: 'btn btn-info btn-xs' %></td>
+        <td><%= link_to 'Destroy', high_score, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-xs' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to new_high_score_path, class: 'btn btn-success' do %>
+  <i class="glyphicon glyphicon-plus"></i> New HighScore
+<% end %>

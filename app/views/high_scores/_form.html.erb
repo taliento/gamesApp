@@ -1,0 +1,38 @@
+<%= form_for(@high_score, html: {class: 'form-horizontal'}) do |f| %>
+  <% if @high_score.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@high_score.errors.count, "error") %> prohibited this high_score from being saved:</h2>
+
+      <ul>
+      <% @high_score.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field form-group">
+    <%= f.label :game, class: 'col-sm-2 control-label' %>
+    <div class="col-sm-10">
+      <%= f.text_field :game, class: 'form-control' %>
+    </div>	 
+  </div>
+  <div class="field form-group">
+    <%= f.label :score, class: 'col-sm-2 control-label' %>
+    <div class="col-sm-10">
+      <%= f.number_field :score, class: 'form-control' %>
+    </div>	
+  </div>
+  <div class="field form-group">
+    <%= f.label :notes, class: 'col-sm-2 control-label' %>
+    <div class="col-sm-10">
+      <%= f.text_area :notes, class: 'form-control' %>
+    </div>	
+  </div>
+
+  <div class="actions form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <%= f.submit class: 'btn btn-primary btn-xs' %>
+    </div>
+  </div>
+<% end %>
