@@ -5,6 +5,11 @@ class HighScoresController < ApplicationController
   # GET /high_scores.json
   def index
     @high_scores = HighScore.all
+    respond_to do |format|
+    	format.html
+    	format.json
+    end
+
   end
 
   # GET /high_scores/1
@@ -31,6 +36,7 @@ class HighScoresController < ApplicationController
         flash[:success] = 'High score was successfully created.' 
         format.html { redirect_to @high_score}
         format.json { render :show, status: :created, location: @high_score }
+	format.js #create.js.erb
       else
 	flash[:danger] = 'There was a problem creating the High score'
         format.html { render :new }
@@ -47,6 +53,7 @@ class HighScoresController < ApplicationController
 	flash[:success] = 'High score was successfully updated.' 
         format.html { redirect_to @high_score}
         format.json { render :show, status: :ok, location: @high_score }
+	format.js #create.js.erb
       else
 	flash[:danger] = 'There was a problem updating the High score'
         format.html { render :edit }

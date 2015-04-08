@@ -1,4 +1,4 @@
-<%= form_for(@high_score, html: {class: 'form-horizontal'}) do |f| %>
+<%= form_for(@high_score, remote: true, html: {class: 'form-horizontal'}) do |f| %>
   <% if @high_score.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@high_score.errors.count, "error") %> prohibited this high_score from being saved:</h2>
